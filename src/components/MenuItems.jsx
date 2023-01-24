@@ -55,7 +55,7 @@ const MenuItems = ({ setShowCategories, selectedCategory, setPositionModalActive
                                 }}
                             >
                                 <ImageContainer>
-                                    <Image src={el.image} />
+                                   {el.image && <Image src={el.image} />}
                                 </ImageContainer>
                                 <MenuItemText>
                                     <MenuItemTitle>{el.name}</MenuItemTitle>

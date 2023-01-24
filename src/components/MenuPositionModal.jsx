@@ -10,10 +10,10 @@ const MenuPositionModal = ({ active, setActive, positionSelect }) => {
             <ModalContent
                 onClick={e => e.stopPropagation()}
             >
-                <ImageContainer>
+             { positionSelect.image &&  <ImageContainer>
                     <Image src={positionSelect.image} />
                 </ImageContainer>
-
+             }
                 <MenuItemText>
                     <MenuItemTitle>{positionSelect.name}</MenuItemTitle>
                     <MenuItemDescription>{positionSelect.components}</MenuItemDescription>
@@ -46,7 +46,7 @@ const ImageContainer = styled.div`
     margin:0.5em;
     overflow:hidden;   
     @media screen and (min-width: 1250px) {
-        width:50vw;
+        width:30vw;
     } 
 `
 const Image = styled.img`
@@ -55,12 +55,15 @@ const Image = styled.img`
     object-fit: cover;
     object-position: bottom;
     border-radius:12px;
+
 `
 
 const MenuItemText = styled.div`
     width: auto;    
     font-family: 'Ubuntu', sans-serif;  
     position:relative;
+    padding:0 1em;
+    
 `
 const MenuItemTitle = styled.h2`
     text-align:center;
