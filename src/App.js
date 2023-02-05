@@ -1,16 +1,17 @@
 import Topbar from './components/Topbar';
 import RespondModal from './components/RespondModal';
-import { useState } from 'react';
 import Footer from './components/Footer';
 import Logo from './components/Logo';
 import MenuCategories from './components/MenuCategories';
 import MenuItems from './components/MenuItems';
 import MenuPositionModal from "./components/MenuPositionModal";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from 'react';
+import { Context } from '.';
 
 
 
 function App() {
+  const { firestore } = useContext(Context)
 
   const [respondModalActive, setRespondModalActive] = useState(false)
   const [showCategories, setShowCategories] = useState(true)
@@ -21,6 +22,9 @@ function App() {
   const [touchEnd, setTouchEnd] = useState(null)
   const [touchHeightStart, setTouchHeightStart] = useState(null)
   const [touchHeightEnd, setTouchHeightEnd] = useState(null)
+  const [menuData, setMenuData] = useState([])
+  const [categories, setCategories] = useState([])
+
 
   // the required distance between touchStart and touchEnd to be detected as a swipe
   const minSwipeDistance = 50
@@ -66,6 +70,30 @@ function App() {
     // eslint-disable-next-line  
   }, [showCategories]);
 
+  useEffect(() => {
+    firestore.collection('menuItems').get().then((snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        data.sort((a, b) => a.sequenceNumber - b.sequenceNumber)
+        setMenuData(data)
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+useEffect(() => {
+  firestore.collection('categories').get().then((snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+      }));
+      data.sort((a, b) => a.sequenceNumber - b.sequenceNumber)
+      setCategories(data)
+  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
   return (
     <div className="App"
       onTouchStart={onTouchStart}
@@ -76,12 +104,14 @@ function App() {
       <Logo />
 
       {
-        showCategories && <MenuCategories setShowCategories={setShowCategories} setSelectedCategory={setSelectedCategory} />
+        showCategories && <MenuCategories setShowCategories={setShowCategories} setSelectedCategory={setSelectedCategory} categories={categories}/>
       }
 
       {
         !showCategories && <MenuItems setShowCategories={setShowCategories} selectedCategory={selectedCategory}
-          setPositionModalActive={setPositionModalActive} setPositionSelect={setPositionSelect} showCategories={showCategories} />
+          setPositionModalActive={setPositionModalActive} setPositionSelect={setPositionSelect} showCategories={showCategories}
+          menuData={menuData}
+          />
       }
 
       <RespondModal active={respondModalActive} setActive={setRespondModalActive} />

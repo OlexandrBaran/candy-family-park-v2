@@ -2,28 +2,12 @@ import Breadcrumbs from "./Breadcrumbs"
 import styled from "styled-components"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useContext, useEffect, useState } from "react";
-import { Context } from "..";
+import {useEffect} from "react";
 
 
 
 
-const MenuItems = ({ setShowCategories, selectedCategory, setPositionModalActive, setPositionSelect, showCategories }) => {
-
-    const [menuData, setMenuData] = useState([])
-    const { firestore } = useContext(Context)
-
-    useEffect(() => {
-        firestore.collection('menuItems').get().then((snapshot) => {
-            const data = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            data.sort((a, b) => a.sequenceNumber - b.sequenceNumber)
-            setMenuData(data)
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+const MenuItems = ({ setShowCategories, selectedCategory, setPositionModalActive, setPositionSelect, showCategories, menuData}) => {
 
 
     useEffect(() => {

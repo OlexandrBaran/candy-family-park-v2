@@ -1,24 +1,9 @@
 import styled from 'styled-components'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useContext, useEffect, useState } from 'react';
-import { Context } from '..';
 
-const MenuCategories = ({ setShowCategories, setSelectedCategory }) => {
-    const [categories, setCategories] = useState([])
-    const { firestore } = useContext(Context)
+const MenuCategories = ({ setShowCategories, setSelectedCategory, categories }) => {
 
-    useEffect(() => {
-        firestore.collection('categories').get().then((snapshot) => {
-            const data = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            data.sort((a, b) => a.sequenceNumber - b.sequenceNumber)
-            setCategories(data)
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
 
 
