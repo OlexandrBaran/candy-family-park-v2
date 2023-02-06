@@ -103,17 +103,18 @@ useEffect(() => {
       <Topbar active={respondModalActive} setActive={setRespondModalActive} showArrowBackBtn={!showCategories} setShowCategories={setShowCategories} />
       <Logo />
 
-      {
-        showCategories && <MenuCategories setShowCategories={setShowCategories} setSelectedCategory={setSelectedCategory} categories={categories}/>
-      }
+      <div>
+        {
+          showCategories && <MenuCategories setShowCategories={setShowCategories} setSelectedCategory={setSelectedCategory} categories={categories}/>
+        }
 
-      {
-        !showCategories && <MenuItems setShowCategories={setShowCategories} selectedCategory={selectedCategory}
-          setPositionModalActive={setPositionModalActive} setPositionSelect={setPositionSelect} showCategories={showCategories}
-          menuData={menuData}
-          />
-      }
-
+        {
+          !showCategories && <MenuItems setShowCategories={setShowCategories} selectedCategory={selectedCategory}
+            setPositionModalActive={setPositionModalActive} setPositionSelect={setPositionSelect} showCategories={showCategories}
+            menuData={menuData}
+            />
+        }
+      </div>
       <RespondModal active={respondModalActive} setActive={setRespondModalActive} />
       <MenuPositionModal active={positionModalActive} setActive={setPositionModalActive} positionSelect={positionSelect} />
       <Footer />

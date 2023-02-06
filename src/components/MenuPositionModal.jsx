@@ -16,7 +16,7 @@ const MenuPositionModal = ({ active, setActive, positionSelect }) => {
              }
                 <MenuItemText>
                     <MenuItemTitle>{positionSelect.name}</MenuItemTitle>
-                    <MenuItemDescription>{positionSelect.components}</MenuItemDescription>
+                    <MenuItemDescription>{positionSelect.about}</MenuItemDescription>
                     <Button 
                         type="button" 
                         onClick={() => {setActive(false)}}
@@ -35,7 +35,7 @@ export default MenuPositionModal;
 const ModalContent = styled.div`
     border-radius:12px;
     background-color:white;
-    margin: 0 12%;
+    margin: 0 2%;
     display:flex;
     flex-direction:column;
     align-items:center;

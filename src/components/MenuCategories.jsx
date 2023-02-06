@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+
 const MenuCategories = ({ setShowCategories, setSelectedCategory, categories }) => {
 
 
