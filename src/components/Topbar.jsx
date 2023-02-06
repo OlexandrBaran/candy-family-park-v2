@@ -3,11 +3,11 @@ import { BiMenu } from 'react-icons/bi'
 import Sidebar from './Sidebar'
 import { useEffect, useRef, useState } from 'react'
 import OutsideClick from "../functions/outsideClick";
-import { AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineClose, AiOutlineLeft } from 'react-icons/ai'
 
 
 
-const Topbar = ({ active, setActive }) => {
+const Topbar = ({ active, setActive, showArrowBackBtn, setShowCategories}) => {
 
     const [closeBtnClassName, setCloseBtnClassName] = useState('')
     const [sidebarClassName, setSidebarClassName] = useState("")
@@ -34,6 +34,17 @@ const Topbar = ({ active, setActive }) => {
 
     return (
         <TopbarContainer ref={boxRef}>
+            {
+            showArrowBackBtn && 
+                <Btn 
+                    style={{left:"3%"}}
+                    onClick={() => {
+                        setShowCategories(true)
+                    }}
+                >
+                    <AiOutlineLeft/>
+                </Btn>
+            }
             <h1>Candy Family Park</h1>
             <Btn
                 onClick={
@@ -41,6 +52,7 @@ const Topbar = ({ active, setActive }) => {
                         setCloseBtnClassName("open")
                         setSidebarClassName("active")
                     }}
+                    style={{right:"3%"}}
             >
                 <BiMenu size={28} />
             </Btn>
@@ -85,7 +97,6 @@ const Btn = styled.button`
     background-color:#28A745;
     border:none;
     top:.95em;
-    right:3%;
     position: absolute;
 `
 

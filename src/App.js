@@ -100,7 +100,7 @@ useEffect(() => {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <Topbar active={respondModalActive} setActive={setRespondModalActive} />
+      <Topbar active={respondModalActive} setActive={setRespondModalActive} showArrowBackBtn={!showCategories} setShowCategories={setShowCategories} />
       <Logo />
 
       {
